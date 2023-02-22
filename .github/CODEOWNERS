@@ -1,10 +1,7 @@
 * @mkyagulanyi-nbcuni
-
-
-
-
-
-
-
+*.js @mkyagulanyi-nbcuni
+*.yml @mkyagulanyi-nbcuni
+/public @mkyagulanyi-nbcuni
+/src @mkyagulanyi-nbcuni
 
 
