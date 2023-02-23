@@ -22,8 +22,8 @@ jobs:
           path: node_modules # Folder to cache
           key: ${{ runner.os }}-npm-dependencies-${{ hashFiles('**/package-lock.json') }} ## Key for the cached folder.
           #restore-keys: ${{ runner.os }}-npm-deps-
-      - name: Find prettier
-        run: find / -type d -name "prettier"
+      - name: Print working directory
+        run: pwd
       - name: Install NPM dependencies
         #        if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }} # Evaluate expression
         run: npm ci
