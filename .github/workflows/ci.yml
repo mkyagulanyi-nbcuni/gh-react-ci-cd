@@ -29,6 +29,6 @@ jobs:
       - name: Deploy to staging
         if: github.event_name == 'push'
         env:
-          SURGE_LOGIN: {{secrets.SURGE_LOGIN}}
-          SURGE_TOKEN: {{secrets.SURGE_TOKEN}}
+          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
+          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
         run: npx surge --project ./build --domain fearful-birth.surge.sh
