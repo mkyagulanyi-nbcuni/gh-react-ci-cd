@@ -1,4 +1,5 @@
-/.github/ @mkyagulanyi-nbcuni
+/.github/workflows/ @mkyagulanyi-nbcuni
 /public/ @mkyagulanyi-nbcuni
 /src/ @mkyagulanyi-nbcuni
-/.github/CODEOWNERS @mkyagulanyi-nbcuni
+/.github/* @mkyagulanyi-nbcuni
+*
