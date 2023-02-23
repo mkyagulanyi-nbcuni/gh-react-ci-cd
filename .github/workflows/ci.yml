@@ -15,6 +15,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "14.x"
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-key: |
+            ${{ runner.os }}-node-
       - name: Install NPM dependencies
         run: npm ci
       - name: Check source code formatting
@@ -29,6 +36,6 @@ jobs:
       - name: Deploy to staging
         if: github.event_name == 'push'
         env:
-          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
-          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
         run: npx surge --project ./build --domain fearful-birth.surge.sh
