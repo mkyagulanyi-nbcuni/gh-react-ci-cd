@@ -19,11 +19,11 @@ jobs:
         id: cache-node-modules
         uses: actions/cache@v3
         with:
-          path: node_modules # Folder to cache
+          path: ~/.npm # Folder to cache
           key: ${{ runner.os }}-npm-dependencies-${{ hashFiles('**/package-lock.json') }} ## Key for the cached folder.
           #restore-keys: ${{ runner.os }}-npm-deps-
       - name: Print working directory
-        run: pwd
+        run: find .  -type d -name "prettier"
       - name: Install NPM dependencies
         #        if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }} # Evaluate expression
         run: npm ci
