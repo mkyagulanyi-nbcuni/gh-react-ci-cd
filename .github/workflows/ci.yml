@@ -16,13 +16,15 @@ jobs:
         with:
           node-version: "14.x"
       - name: Cache node_modules
+        id: cache-node-modules
         uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm # Folder to cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} # Key for the cached folder
           restore-key: |
             ${{ runner.os }}-node-
       - name: Install NPM dependencies
+        if: steps.cache-node-modules.cache-hit == 'true'
         run: npm ci
       - name: Check source code formatting
         run: npm run format:check
