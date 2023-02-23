@@ -21,8 +21,6 @@ jobs:
         with:
           path: ~/.npm # Folder to cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} # Key for the cached folder
-          restore-key: |
-            ${{ runner.os }}-node-
       - name: Install NPM dependencies
         if: steps.cache-node-modules.cache-hit == 'true'
         run: npm ci
