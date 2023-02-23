@@ -22,7 +22,7 @@ jobs:
           path: ~/.npm # Folder to cache
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} # Key for the cached folder
       - name: Install NPM dependencies
-        if: steps.cache-node-modules.cache-hit == 'true'
+        #if: steps.cache-node-modules.cache-hit == 'true'
         run: npm ci
       - name: Check source code formatting
         run: npm run format:check
