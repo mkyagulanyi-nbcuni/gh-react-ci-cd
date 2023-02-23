@@ -20,13 +20,13 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm # Folder to cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }} # Key for the cached folder
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }} # Key for the cached folder
       - name: Install NPM dependencies
         if: ${{ steps.cache-node-modules.cache-hit == 'true' }} # Evaluate expression
         run: npm ci
       - name: Check source code formatting
         run: |
-          #npm install prettier --save-dev
+#          npm install prettier --save-dev
           npm run format:check
       - name: Run automated tests
         env:
