@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules # Folder to cache
-          key: ${{ runner.os }}-npm-deps-${{ hashFiles('**/package-lock.json') }} # Key for the cached folder.
+          key: ${{ runner.os }}-npm-deps-${{ hashFiles('**/package-lock.json') }} ## Key for the cached folder.
           restore-keys: ${{ runner.os }}-npm-deps-
       - name: Install NPM dependencies
         if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }} # Evaluate expression
