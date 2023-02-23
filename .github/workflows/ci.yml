@@ -14,7 +14,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
+          node-version: "18.x" # Updates node version
       - name: Cache node_modules
         id: cache-node-modules
         uses: actions/cache@v3
