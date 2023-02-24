@@ -29,7 +29,7 @@ jobs:
         run: npm run format:check
       - name: Run automated tests
         env:
-          CI: true
+          CI: true # Must be enable to run react tests in CI
         run: npm test -- --coverage
       - name: Upload test coverage artifact
         uses: actions/upload-artifact@v3
