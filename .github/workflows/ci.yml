@@ -27,7 +27,7 @@ jobs:
         run: npm ci
       - name: Check source code formatting
         run: npm run format:check
-      - name: Run automated tests
+      - name: Run automated tests # More docs!!!
         env:
           CI: true # Must be enable to run react tests in CI
         run: npm test -- --coverage
