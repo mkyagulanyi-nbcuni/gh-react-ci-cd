@@ -46,9 +46,9 @@ jobs:
           name: build-artifact
           path: build
       - name: Create a release
-        if:
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: npx semantic-release
-        env: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to staging
         if: github.event_name == 'push'
