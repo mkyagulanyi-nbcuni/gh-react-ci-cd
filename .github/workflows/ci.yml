@@ -14,8 +14,16 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: "14.x"
+          node-version: "18.x" # Updates node  ver
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules # Folder to cache
+          key: ${{ runner.os }}-npm-dependencies-${{ hashFiles('**/package-lock.json') }} ## Key for the cached folder.
+          #restore-keys: ${{ runner.os }}-npm-deps-
       - name: Install NPM dependencies
+        if: ${{ steps.cache-node-modules.outputs.cache-hit != 'true' }} # Evaluate expression
         run: npm ci
       - name: Check source code formatting
         run: npm run format:check
@@ -23,12 +31,23 @@ jobs:
         env:
           CI: true
         run: npm test -- --coverage
+      - name: Upload test coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage
+          path: coverage
       - name: Build project
         if: github.event_name == 'push'
         run: npm run build
+      - name: Upload build  artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: build
       - name: Deploy to staging
         if: github.event_name == 'push'
         env:
-          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
-          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
         run: npx surge --project ./build --domain fearful-birth.surge.sh
